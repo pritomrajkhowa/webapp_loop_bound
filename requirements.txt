@@ -4,3 +4,4 @@ gunicorn==19.9.0
 eventlet==0.25.1
 wolframalpha==4.0.0
 pyparsing==2.4.7
+regex==2020.7.14
