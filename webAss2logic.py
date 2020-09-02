@@ -65,7 +65,12 @@ def tempdisplayOutput(insts_list):
 
 def blockHandler(codelist, global_stack,local_stack):
 
+    global Count_Assertion
+
+    global Count_Assumption
+
     insts_list = []
+
 
     for inst in codelist:
 
