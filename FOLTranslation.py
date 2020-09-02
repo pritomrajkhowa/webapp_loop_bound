@@ -1407,6 +1407,41 @@ def translate1(p,v,flag):
  
             output_val+=output_axioms_fn_print(f,o,a)
 
+            output_val+='\n4. Assumption :\n'
+            for x in assume_list:
+
+                if x[0]=='i1':
+
+                        output_val+='\nForAll '+x[2]+' ( '+ expr2string1(x[-1])+' ) \n'
+
+
+                else:
+
+                        if x[0]=='e':
+
+                               output_val+='\n'+expr2string1(x[-1])+'\n'
+
+                        elif x[0]!='i0':
+
+                               output_val+='\n'+wff2string1(x)+'\n'
+
+            output_val+='\n5. Assertion :\n'
+            for x in assert_list:
+
+                if x[0]=='i1':
+
+                        output_val+='\nForAll '+x[2]+' ( '+ expr2string1(x[-1])+' ) \n'
+
+
+                else:
+
+                        if x[0]=='e':
+
+                               output_val+='\n'+expr2string1(x[-1])+'\n'
+
+                        elif x[0]!='i0':
+
+                               output_val+='\n'+wff2string1(x)+'\n'
 
 
         return f_map,o_map,a_map,cm_map,assert_list_map,assume_list_map,assert_key_map,output_val

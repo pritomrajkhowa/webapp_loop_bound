@@ -10,6 +10,9 @@ currentdirectory = os.path.dirname(os.path.realpath(__file__))
 
 
 
+Count_Assertion=1
+
+Count_Assumption=1
 
 
 
@@ -332,16 +335,20 @@ def blockHandler(codelist, global_stack,local_stack):
 
              elif inst_operant==2:
 
+                Count_Assumption = Count_Assumption + 1
+
                 temp = local_stack.pop()
 
-                insts_list.append(['-1','=',['_assumption'], temp])
+                insts_list.append(['-1','=',['_'+str(Count_Assumption)+'_assumption'], temp])
 
 
              elif inst_operant==3:
 
                 temp = local_stack.pop()
 
-                insts_list.append(['-1','=',['_assertion'],temp])
+                Count_Assertion = Count_Assertion+1
+
+                insts_list.append(['-1','=',['_'+str(Count_Assertion)+'_assertion'],temp])
 
           elif inst_type=='br':
 
@@ -479,6 +486,11 @@ def blockHandler(codelist, global_stack,local_stack):
 
 
 def translation():
+
+    global Count_Assertion
+
+    global Count_Assumption
+
 
     if (os.path.exists(currentdirectory+'/test.wasm')): 
        with open('test.wasm', 'rb') as file:
@@ -693,25 +705,31 @@ def translation():
 
                 vfact['ret'] = temp_list3
 
-                temp_list4 = []
+                for vcount in range(0,Count_Assertion):
 
-                vfactCount = vfactCount+1
+                    temp_list4 = []
 
-                temp_list4.append('_x'+str(vfactCount))
+                    vfactCount = vfactCount+1
 
-                temp_list4.append('int')
+                    temp_list4.append('_x'+str(vfactCount))
 
-                vfact['_assertion'] = temp_list4
+                    temp_list4.append('int')
 
-                temp_list5 = []
+                    vfact['_'+str(vcount+1)+'_assertion'] = temp_list4
 
-                vfactCount = vfactCount+1
 
-                temp_list5.append('_x'+str(vfactCount))
+                for vcount in range(0,Count_Assumption):
 
-                temp_list5.append('int')
 
-                vfact['_assumption'] = temp_list5
+                    temp_list5 = []
+
+                    vfactCount = vfactCount+1
+
+                    temp_list5.append('_x'+str(vfactCount))
+
+                    temp_list5.append('int')
+
+                    vfact['_'+str(vcount+1)+'_assumption'] = temp_list5
 
                 vfact_map['function'+str(fun_count)] = vfact
 
