@@ -1368,15 +1368,16 @@ def translate1(p,v,flag):
             #f,o,a,cm = getDummyFunction(f,o,a,cm)
             #f,o,a,cm = update__VERIFIER_nondet(f,o,a,cm)
             
-    
+            f,o,a,assert_list,assume_list,assert_key=getAssertAssume(f,o,a,cm)
+
             #f,o,a,assert_list,assume_list,assert_key=getAssertAssume(f,o,a,cm)
             
             
-            assert_list=[]
+            #assert_list=[]
             
-            assume_list=[]
+            #assume_list=[]
             
-            assert_key=[]
+            #assert_key=[]
             
             assert_key_map={}
             
@@ -1530,6 +1531,56 @@ def simplification_expr(e):
 
  
 
+def getAssertAssume(f,o,a,cm):
+    new_o={}
+    new_a=[]
+    new_f={}
+    assert_list = []
+    assume_list = []
+    assert_key = []
+
+    for x in f:
+        if x.find('_assertion')<0 and x.find('_assumption')<0:
+            new_f[x]=f[x]
+
+
+    for x in o:
+        if x.find('_assertion')>0  and o[x][-1][0].find('_assertion')<0:
+            assert_list.append(o[x])
+        elif x.find('_assumption')>0 and o[x][-1][0].find('_assumption')<0:
+            assume_list.append(o[x])
+        else:
+            new_o[x]=o[x]
+
+    
+    for x in a:
+
+        if x[0]=='i1':
+
+           if x[3][0].find('_assertion')>0:
+
+              assert_list.append(x)
+
+           elif x[3][0].find('_assumption')>0:
+
+              assert_list.append(x)
+
+           else:
+
+              new_a.append(x) 
+
+        elif x[0]=='i0':
+
+           if x[-2][0].find('_assertion')<0 and x[-2][0].find('_assumption')<0:
+
+              new_a.append(x)
+
+        else:
+
+           new_a.append(x) 
+
+
+    return new_f, new_o, new_a, assert_list, assume_list, assert_key
 
 
 
