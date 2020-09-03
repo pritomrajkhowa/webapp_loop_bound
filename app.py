@@ -156,11 +156,7 @@ app.layout = html.Div([
           {'label':'jm2006_variant_true-unreach-call_true-termination-i.c', 'value':'jm2006_variant_true-unreach-call_true-termination-i.c'},
           {'label':'count_by_1_true-unreach-call_true-termination.c', 'value':'count_by_1_true-unreach-call_true-termination.c'},
           {'label':'count_by_1_variant_true-unreach-call_true-termination.c', 'value':'count_by_1_variant_true-unreach-call_true-termination.c'},
-          {'label':'count_by_2_true-unreach-call_true-termination.c', 'value':'count_by_2_true-unreach-call_true-termination.c'},
-          {'label':'gauss_sum_true-unreach-call.i.p+cfa-reducer.c', 'value':'gauss_sum_true-unreach-call.i.p+cfa-reducer.c'},
-          {'label':'gauss_sum_true-unreach-call.i.v+cfa-reducer.c', 'value':'gauss_sum_true-unreach-call.i.v+cfa-reducer.c'},
-          {'label':'gauss_sum_true-unreach-call_true-termination.c', 'value':'gauss_sum_true-unreach-call_true-termination.c'}
-
+          {'label':'count_by_2_true-unreach-call_true-termination.c', 'value':'count_by_2_true-unreach-call_true-termination.c'}
     ], value='afnp2014_true-unreach-call-i.c'),
       html.H6(children='Input Program'),
       dcc.Textarea(
